@@ -1,0 +1,13 @@
+{
+    "name": "sample-node-app",
+    "version": "1.0.0",
+    "description": "Simple Node.js app for CI/CD",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "build": "echo Build step (nothing to build)",
+        "test": "node test.js"
+    },
+    "author": "your-name",
+    "license": "ISC"
+}

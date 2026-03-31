@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: Node.js CI/CD Pipeline
 
 on:
   push:
@@ -7,11 +7,15 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
+    env:
+      API_KEY: ${{ secrets.API_KEY }}
+      DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+
     steps:
-    - name: Checkout code
+    - name: Checkout Code
       uses: actions/checkout@v3
 
     - name: Setup Node.js
@@ -19,11 +23,21 @@ jobs:
       with:
         node-version: '18'
 
-    - name: Install dependencies
+    - name: Install Dependencies
       run: npm install
 
-    - name: Build project
+    - name: Build Application
       run: npm run build
 
-    - name: Run tests
+    - name: Run Tests
       run: npm test
+
+    - name: Use Secrets (Demo)
+      run: |
+        echo "Using API_KEY: $API_KEY"
+        echo "Using DEPLOY_TOKEN: $DEPLOY_TOKEN"
+
+    - name: Deploy Application
+      run: |
+        echo "Deploying application..."
+        echo "Deployment successful 🚀"
